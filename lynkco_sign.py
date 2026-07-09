@@ -1010,7 +1010,8 @@ def cmd_sign(args: argparse.Namespace) -> int:
     session = load_session(args.session)
     token = _require_token(args, session)
 
-    if args.status:
+    # sign --status；从 auto 跳转过来时可能没有 status 字段
+    if getattr(args, "status", False):
         print("=== 签到状态 day/info ===")
         _print_json(sign_status(token))
         print("=== 连续天数/补签卡 ===")
