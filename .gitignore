@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.DS_Store
+*.json
+!package.json
+.lynkco_session.json
+session.json
+*.apk
+.idea/
+.vscode/
