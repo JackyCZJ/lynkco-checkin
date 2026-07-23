@@ -4,7 +4,7 @@
 
 基于 APK / Weex 逆向：
   - 登录网关: https://app-services.lynkco.com.cn
-  - 签到接口: POST /up/api/v1/user/sign
+  - 签到接口: POST /up/api/v1/user/sign/upgrade  （旧路径 /up/api/v1/user/sign 已下线）
   - 鉴权: APPCODE / X-Ca 签名 + header.token
 
 用法示例:
@@ -713,10 +713,15 @@ def user_info(token: str) -> Dict[str, Any]:
 # 签到
 # ---------------------------------------------------------------------------
 def sign_in(token: str) -> Dict[str, Any]:
-    """真正的每日签到。"""
+    """真正的每日签到。
+
+    App/Cordova 现网已改为 POST /up/api/v1/user/sign/upgrade
+    （旧 /up/api/v1/user/sign 会 400「接口请求异常」）。
+    前端 signPut 无 body，header 带 use_security=true。
+    """
     return request(
         "POST",
-        "/up/api/v1/user/sign",
+        "/up/api/v1/user/sign/upgrade",
         body={},
         token=token,
         auth_mode="appcode",
@@ -1018,7 +1023,7 @@ def cmd_sign(args: argparse.Namespace) -> int:
         _print_json(continue_days(token))
         return 0
 
-    print("=== 发起签到 POST /up/api/v1/user/sign ===")
+    print("=== 发起签到 POST /up/api/v1/user/sign/upgrade ===")
     resp = sign_in(token)
     _print_json(resp)
     if _ok(resp):

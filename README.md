@@ -7,7 +7,7 @@
 ## 功能
 
 - **交互登录**：本机打开浏览器完成 **GeeTest V4** → 发短信 → 输入验证码 → 保存 session  
-- **签到**：`POST /up/api/v1/user/sign`  
+- **签到**：`POST /up/api/v1/user/sign/upgrade`（旧 `/up/api/v1/user/sign` 已下线）  
 - **刷新 token**、查签到状态、查用户信息  
 - Session 默认写入 `~/.lynkco_session.json`
 
@@ -74,7 +74,7 @@ python3 lynkco_sign.py auto
     → POST /auth/v1/security/geeTestV4/validate  → challenge/certifyId
     → POST /auth/login/sliding/sendSms           → 短信
     → POST /auth/login/mobileCodeLogin           → centerTokenDto.token
-    → POST /up/api/v1/user/sign                  → 签到
+    → POST /up/api/v1/user/sign/upgrade           → 签到
 ```
 
 注意：
